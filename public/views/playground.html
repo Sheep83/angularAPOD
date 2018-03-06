@@ -1,0 +1,82 @@
+<div class="tile-container">
+<div class="half-width-tile">
+  <md-select ng-model="rover" ng-change="getRoverManifest(rover)" placeholder="Select a Rover..." class="md-no-underline ">
+    <md-option ng-value="rover.name" ng-repeat="rover in rovers">{{ rover.name }}</md-option>
+  </md-select>
+
+  <md-select ng-model="camera" ng-change="filterByCamera(camera)" placeholder="Select a Camera..." class="md-no-underline ">
+    <md-option ng-value="camera.name" ng-repeat="camera in cameras">{{ camera.fullName }}</md-option>
+  </md-select>
+
+  <div class ="row input-group">
+  <div class="text-container" ng-show="sols.length > 0">
+  <input type="text" class="form-control" ng-change="filterSols()" ng-model="manualSol" bs-options="sol for sol in filteredSols" placeholder="Search by Sol..." bs-typeahead>
+  </div>
+  <div class="rover-button-container">
+  <button id="randombutton" type="button" ng-show="sols.length > 0" ng-click="randomDate()" title="Random" class="btn btn-default grow shadow">
+  <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+  </button>
+  </div>
+  </div>
+</div>
+
+<div class="half-width-tile" ng-show="manifest">
+<h6>{{manifest.photo_manifest.name}} Images Available : {{manifest.photo_manifest.total_photos}}</h6>
+<h6>Latest image date : {{manifest.photo_manifest.max_date | date:'fullDate'}}</h6>
+<h6>Days since last image : {{diffDays}}</h6>
+<h6>Mission Days Active: {{manifest.photo_manifest.photos.length}}</h6>
+<h6>Mission Status: {{manifest.photo_manifest.status}}</h6>
+<h6 class="warning" ng-hide="sols.length > 0">Select a camera to narrow your search</h6>
+<h6 ng-show="sols.length > 0">{{sols.length}} available days with selected camera</h6>
+</div>
+<div class="half-width-tile" ng-show="!manifest">
+<h6>&nbsp;</h6>
+<h6>&nbsp;</h6>
+<h6>&nbsp;</h6>
+<h6>&nbsp;</h6>
+<h6>&nbsp;</h6>
+<h6>&nbsp;</h6>
+</div>
+</div>
+
+<div class="tile-container" ng-show="filteredSols.length > 0">
+<div ng-click="getFiltered(rover, item, camera)" class="rover-tile" ng-repeat="item in filteredSols" >
+
+<img title="{{rover}}" ng-src="{{roverImage}}">
+  <!-- <h5>Results: {{filteredSols.length}}</h5> -->
+  <!-- <img ng-src="{{item.img_src}}"> -->
+  <p class="text grow-text"><span>Martian Sol: {{item}}</span></p>
+</div>
+</div>
+
+<div class="tile-container" ng-hide="filteredSols.length > 0">
+<div class="home-tile" ng-repeat="item in filtered.photos">
+  <img ng-src="{{item.img_src}}">
+  <div class="button-container" align="middle";>
+        <button class="ng-button btn btn-default grow shadow" ng-click="favRoverpic(item)" id="roverfav" title="Favourite"><span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+        </button>
+        <button class="ng-button btn btn-default grow shadow" ng-click="displayRoverpic($event, item)" title="View in Popup" id="fullsize"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+        </button>
+        <button class="ng-button btn btn-default grow shadow" ng-click="saveRoverpic(item)" title="Save Image" id="delete"><span class="glyphicon glyphicon-floppy-save" aria-hidden="true"></span>
+        </button>
+      </div>
+</div>
+</div>
+
+<div style="visibility: hidden">
+    <div class="md-dialog-container" id="myDialog">
+      <md-dialog layout-padding>
+        <!-- <div class="row">
+        <div class="col-md-12 rover-image"> -->
+          <img style="margin: auto; max-width: 100%;" ng-src="{{roverImage.img_src}}">
+        <!-- </div>
+        </div> -->
+      </md-dialog>
+    </div>
+</div>
+
+<div layout="row"  ng-show="isLoading" layout-sm="column" layout-align="space-around">
+  <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+</div> 
+
+

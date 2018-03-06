@@ -1,0 +1,70 @@
+<!-- <div class="tile-container">
+<div class="home-tile" ng-repeat="item in favourites">
+  <img title="{{item.title}}"  ng-show="item.url" ng-src="{{item.url}}">
+  <img title="{{item.title}}"  ng-show="item.img_src" ng-src="{{item.img_src}}">
+  <div class="button-container" align="middle";>
+    <button ng-hide="item.earth_date" class="ng-button btn btn-default grow shadow" ng-click="showInfo($event, item)" id="infobutton" title="Info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    </button>
+    <button ng-hide="item.earth_date" class="ng-button btn btn-default grow shadow" ng-click="displayFavourite(item)" title="View in Page" id="fullsize"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+    </button>
+    <button class="ng-button btn btn-default grow shadow" ng-click="expandFavourite($event, item)" title="View in Popup" id="popup"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+    </button>
+    <button class="ng-button btn btn-default grow shadow" ng-click="deleteFavourite(item)" title="Delete from Favourites" id="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+  </div>
+</div>
+</div>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" flex id="myDialog">
+    <md-dialog layout-padding> -->
+    
+    <!-- <img ng-show="popupImage.hdurl" ng-src="{{popupImage.hdurl}}" style="margin: auto; max-width: 100%;">
+    <img ng-show="popupImage.img_src" ng-src="{{popupImage.img_src}}" style="margin: auto; max-width: 100%;">
+
+    </md-dialog>
+  </div>
+</div> -->
+<div class="apod-banner tile-container" id="panelheading">
+<h2>Favourites</h2>
+</div>
+<div class="tile-container">
+<div class="responsive-container" flex="20" ng-repeat="item in favourites">
+  <img class="tile-image" title="{{item.title}}"  ng-show="item.url" ng-src="{{item.url}}">
+  <img class="tile-image" title="{{item.title}}"  ng-show="item.img_src" ng-src="{{item.img_src}}">
+  <img class="tile-image" title="{{item.title}}"  ng-show="item.media_type == 'video'" ng-src="{{item.hqdefault}}">
+  <div class="overlay">
+  <div class="button-container-fav" align="middle";>
+    <button ng-hide="item.earth_date" class="ng-button btn btn-default grow shadow" ng-click="showInfo($event, item)" id="infobutton" title="Info"><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+    </button>
+    <button ng-hide="item.earth_date" class="ng-button btn btn-default grow shadow" ng-click="displayFavourite(item)" title="View in Page" id="fullsize"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+    </button>
+    <button class="ng-button btn btn-default grow shadow" ng-click="expandFavourite($event, item)" title="View in Popup" id="popup"><span class="glyphicon glyphicon-resize-full" aria-hidden="true"></span>
+    </button>
+    <button class="ng-button btn btn-default grow shadow" ng-click="deleteFavourite(item)" title="Delete from Favourites" id="delete"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
+    </button>
+  </div>
+  </div>
+</div>
+</div>
+<div style="visibility: hidden">
+  <div class="md-dialog-container md-dialog-img-container" flex id="myDialog">
+    <md-dialog layout-padding>
+    <md-dialog-content class="md-dialog-img-container">
+    <img ng-show="popupImage.hdurl" ng-src="{{popupImage.hdurl}}">
+    <img ng-show="popupImage.img_src" ng-src="{{popupImage.img_src}}">
+    </md-dialog-content>
+    </md-dialog>
+  </div>
+</div>
+
+<div style="visibility: hidden">
+  <div class="md-dialog-container" flex id="myinfoDialog">
+    <md-dialog layout-padding>
+    <md-dialog-content>
+    <p>{{popupInfo}}</p>
+    </md-dialog-content>
+    </md-dialog>
+  </div>
+</div>
+

@@ -1,0 +1,62 @@
+
+<div class="apod-banner tile-container" id="panelheading">
+<div class="apod-header" id="apodHeader"flex="33">
+  <h5>{{apodData.title}}</h5>
+  <h6>{{imgDate}}</h6>
+  </div>
+  <div id="inputContainer" class="input-container" flex="33">
+      <button type="button" ng-click="addFavourite(apodData)" id="favbutton" title="Favourite" class="btn btn-default grow shadow">
+        <span class="glyphicon glyphicon-star" aria-hidden="true"></span>
+      </button>
+      <button id="hdbutton" type="button" ng-click="newWindow(apodData.hdurl)" title="Full Size" class="btn btn-default grow shadow">
+        <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+      </button>
+      <button id="randombutton" type="button" ng-click="randomDate()" title="Random" class="btn btn-default grow shadow">
+        <span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>
+      </button>
+  </div>
+  <div class="input-container" flex="33">
+    <md-datepicker ng-model="date" ng-change="selectedDate(date)" md-current-view="year" md-placeholder="Choose a date"></md-datepicker>
+  </div>
+    <!-- <div class="col-xs-4 apod-input-right">
+    <md-select  ng-model="selectedItem" ng-change="dropdownDisplay(selectedItem)" placeholder="Recent" class="md-no-underline md-primary">
+    <md-option ng-value="item" ng-repeat="item in visited">{{ item.title }}</md-option>
+    </md-select>
+    </div> -->
+    </div>
+    <div class="visited-banner tile-container" id="visitedBar">
+      <div class="fav-thumb grow" ng-repeat="item in visited" flex="10" ng-click="visitedDisplay(item)">
+      <img id="mainImage" class="displayed" ng-src="{{item.url | trustUrl}}" style="border: 1px solid #000;" title="{{item.title}}"/>
+      </div>
+    </div>
+<div class="panel-body tile-container">
+<div class="apod-display" ng-show="apodData.media_type == 'image'" flex="60">
+      <img id="mainImage" class="displayed" ng-src="{{apodData.url | trustUrl}}" style="border: 1px solid #000;" title="{{apodData.title}}"/>
+</div>
+<div class="video-display" ng-show="apodData.media_type == 'video'" flex="60">
+      <iframe class="" allowfullscreen controls ng-src="{{apodData.url | trustUrl}}" style="border: 1px solid #000;">
+      </iframe>
+</div>
+  <div id="maintext" flex="40" class="imgtext">{{apodData.explanation}}>
+    <div ng-show="apodData.copyright">
+    <hr>
+  <h5> &copy; {{apodData.copyright}}</h5>
+  </div>
+  </div>
+</div>
+  
+  
+  <div layout="row"  ng-show="isLoading" layout-sm="column" layout-align="space-around">
+    <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+  </div> 
+
+ 
+
+  <!-- <div class="row">
+  <div ng-show="error">{{error}}</div>
+  <div class="imgheader col-md-12">
+    <h3>{{apodData.title}}</h3>
+    <h4>{{imgDate}}</h4>
+  </div>
+  </div> -->
+   
